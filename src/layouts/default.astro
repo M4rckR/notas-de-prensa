@@ -1,0 +1,115 @@
+---
+interface Props {
+    title: string;
+    description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={title} />
+    {description && <meta property="twitter:description" content={description} />}
+</head>
+<body>
+    <header class="site-header">
+        <nav>
+            <a href="/" class="logo">Noticias</a>
+            <div class="nav-links">
+                <a href="/noticias">Todas las Noticias</a>
+            </div>
+        </nav>
+    </header>
+
+    <slot />
+
+    <footer class="site-footer">
+        <p>&copy; {new Date().getFullYear()} Tu Sitio de Noticias. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
+
+<style is:global>
+    :root {
+        --primary-color: #007bff;
+        --text-color: #333;
+        --background-color: #fff;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        color: var(--text-color);
+        background: var(--background-color);
+        line-height: 1.6;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+<style>
+    .site-header {
+        background: var(--background-color);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .site-header nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    .nav-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: background-color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+        background-color: #f0f0f0;
+    }
+
+    .site-footer {
+        text-align: center;
+        padding: 2rem;
+        margin-top: 4rem;
+        background: #f8f9fa;
+        color: #666;
+    }
+</style> 

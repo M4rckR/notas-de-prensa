@@ -1,16 +1,57 @@
 ---
+import Layout from '../components/Layout.astro';
+import NewsCard from '../components/NewsCard.astro';
+import CategoryFilter from '../components/CategoryFilter.astro';
+import { getCollection } from 'astro:content';
 
+// Obtener todas las noticias
+const noticias = await getCollection('noticias');
+
+// Ordenar noticias por fecha (más recientes primero)
+const noticiasOrdenadas = noticias.sort((a, b) => 
+  b.data.fecha.getTime() - a.data.fecha.getTime()
+);
+
+// Obtener categorías únicas
+const categories = [...new Set(noticiasOrdenadas.map(noticia => noticia.data.categoria))].sort();
+
+// Obtener categoría seleccionada de la URL
+const url = new URL(Astro.request.url);
+const selectedCategory = url.searchParams.get('categoria') || 'todas';
+
+// Filtrar noticias si hay una categoría seleccionada
+const filteredNoticias = selectedCategory === 'todas' 
+  ? noticiasOrdenadas 
+  : noticiasOrdenadas.filter(noticia => noticia.data.categoria.toLowerCase() === selectedCategory.toLowerCase());
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Blog de Noticias">
+  <div class="container max-w-7xl mx-auto px-4 my-12 md:my-16 lg:my-24">
+    <!-- <h1 class="text-3xl font-bold text-gray-900 mb-8">Últimas Noticias</h1> -->
+    
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Sidebar con filtros -->
+      <aside class="lg:w-1/4">
+        <CategoryFilter 
+          categories={categories} 
+          selectedCategory={selectedCategory}
+        />
+      </aside>
+      
+      <!-- Grid de noticias -->
+      <main class="lg:w-3/4">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {filteredNoticias.map((noticia) => (
+            <NewsCard noticia={noticia.data} slug={noticia.slug} />
+          ))}
+        </div>
+        
+        {filteredNoticias.length === 0 && (
+          <div class="text-center py-12">
+            <p class="text-gray-500 text-lg">No se encontraron noticias para esta categoría.</p>
+          </div>
+        )}
+      </main>
+    </div>
+  </div>
+</Layout>

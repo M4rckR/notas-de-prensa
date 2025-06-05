@@ -1,0 +1,155 @@
+---
+export interface Props {
+  categories: string[];
+  selectedCategory: string;
+}
+
+const { categories, selectedCategory } = Astro.props;
+---
+
+<div class="bg-white rounded-lg shadow-md p-6 mb-6">
+  <h3 class="text-lg font-semibold text-gray-800 mb-4">Filtrar por categoría</h3>
+  
+  <div class="space-y-2">
+    <button 
+      data-category="todas"
+      class={`w-full text-left px-4 py-2 rounded-md cursor-pointer transition-colors duration-200 ${
+        selectedCategory === 'todas' 
+          ? 'bg-blue-600 text-white' 
+          : 'text-gray-700 hover:bg-gray-100'
+      }`}
+    >
+      Todas las noticias
+    </button>
+    
+    {categories.map((category) => (
+      <button 
+        data-category={category.toLowerCase()}
+        class={`w-full text-left px-4 cursor-pointer py-2 rounded-md transition-colors duration-200 ${
+          selectedCategory === category.toLowerCase() 
+            ? 'bg-blue-600 text-white' 
+            : 'text-gray-700 hover:bg-gray-100'
+        }`}
+      >
+        {category}
+      </button>
+    ))}
+  </div>
+</div>
+
+<script>
+  let filterInitialized = false;
+
+  function initCategoryFilter() {
+    // Evitar inicialización múltiple
+    if (filterInitialized) {
+      return;
+    }
+
+    const categoryButtons = document.querySelectorAll('button[data-category]') as NodeListOf<HTMLButtonElement>;
+    const allNewsCards = document.querySelectorAll('[data-categoria]') as NodeListOf<HTMLElement>;
+    const noResultsDiv = document.querySelector('.text-center.py-12') as HTMLElement;
+    
+    if (!categoryButtons.length || !allNewsCards.length) {
+      console.warn('Category filter: No buttons or cards found');
+      return;
+    }
+    
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const categoria = this.dataset.category;
+        if (!categoria) return;
+        
+        // Guardar posición del scroll
+        const currentScrollPosition = window.scrollY;
+        
+        // Actualizar botones activos
+        categoryButtons.forEach(btn => {
+          if (btn === this) {
+            btn.className = btn.className.replace(
+              /text-gray-700.*?hover:bg-gray-100/,
+              'bg-blue-600 text-white'
+            );
+          } else {
+            btn.className = btn.className.replace(
+              'bg-blue-600 text-white',
+              'text-gray-700 hover:bg-gray-100'
+            );
+          }
+        });
+        
+        // Filtrar noticias
+        let visibleCards = 0;
+        allNewsCards.forEach(card => {
+          const cardCategoria = card.getAttribute('data-categoria')?.toLowerCase() || '';
+          if (categoria === 'todas' || cardCategoria === categoria) {
+            card.style.display = 'block';
+            visibleCards++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Mostrar/ocultar mensaje de no resultados
+        if (noResultsDiv) {
+          noResultsDiv.style.display = visibleCards === 0 ? 'block' : 'none';
+        }
+        
+        // Actualizar URL
+        const newUrl = categoria === 'todas' ? '/' : `/?categoria=${categoria}`;
+        window.history.pushState({}, '', newUrl);
+
+        // Restaurar posición del scroll
+        setTimeout(() => {
+          window.scrollTo(0, currentScrollPosition);
+        }, 50);
+      });
+    });
+
+    // Manejar navegación del historial
+    window.addEventListener('popstate', () => {
+      const url = new URL(window.location.href);
+      const categoria = url.searchParams.get('categoria') || 'todas';
+      const targetButton = document.querySelector(`button[data-category="${categoria}"]`) as HTMLButtonElement;
+      if (targetButton) {
+        targetButton.click();
+      }
+    });
+
+    filterInitialized = true;
+    console.log('Category filter initialized');
+  }
+
+  function resetFilter() {
+    filterInitialized = false;
+  }
+
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCategoryFilter);
+  } else {
+    initCategoryFilter();
+  }
+
+  // Reinicializar cuando se regresa a la página (navegación del navegador)
+  window.addEventListener('pageshow', function(event) {
+    // Si es navegación de vuelta desde otra página
+    if (event.persisted || window.performance.navigation.type === 2) {
+      resetFilter();
+      setTimeout(initCategoryFilter, 100);
+    }
+  });
+
+  // Reinicializar cuando cambia la URL (para navegación interna)
+  let currentUrl = window.location.href;
+  setInterval(() => {
+    if (window.location.href !== currentUrl) {
+      currentUrl = window.location.href;
+      // Solo reinicializar si estamos en la página principal
+      if (window.location.pathname === '/' || window.location.pathname === '') {
+        resetFilter();
+        setTimeout(initCategoryFilter, 100);
+      }
+    }
+  }, 500);
+</script> 

@@ -1,0 +1,130 @@
+---
+import Layout from '../../components/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const noticias = await getCollection('noticias');
+  return noticias.map(noticia => ({
+    params: { slug: noticia.slug },
+    props: { noticia },
+  }));
+}
+
+const { noticia } = Astro.props;
+const { Content } = await noticia.render();
+
+// Formatear fecha
+function formatearFecha(fecha: Date) {
+  return fecha.toLocaleDateString('es-ES', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+---
+
+<Layout title={noticia.data.titulo}>
+  <div class="container max-w-4xl mx-auto px-4 py-8">
+    <a 
+      href="/" 
+      class="text-blue-600 hover:text-blue-800 mb-4 inline-flex items-center gap-2"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Volver al inicio
+    </a>
+    
+    <article class="bg-white rounded-lg shadow-lg overflow-hidden">
+      {noticia.data.imagen && (
+        <img
+          src={noticia.data.imagen}
+          alt={noticia.data.titulo}
+          class="w-full h-[420px] object-cover"
+          loading="lazy"
+        />
+      )}
+      
+      <div class="p-6 md:p-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900">
+          {noticia.data.titulo}
+        </h1>
+        
+        <div class="flex flex-wrap gap-4 mt-4 text-gray-600 border-b border-gray-200 pb-4">
+          <p class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            {formatearFecha(noticia.data.fecha)}
+          </p>
+          <p class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            Por: {noticia.data.autor}
+          </p>
+          <p class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+            {noticia.data.categoria}
+          </p>
+        </div>
+        
+        <div class="mt-6 prose prose-lg max-w-none">
+          <Content />
+        </div>
+      </div>
+    </article>
+  </div>
+</Layout>
+
+<style is:global>
+  .prose {
+    color: #374151;
+  }
+  
+  .prose h2 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #111827;
+  }
+  
+  .prose a {
+    text-decoration: none;
+    color: #2563eb;
+  }
+  
+  .prose a:hover {
+    text-decoration: underline;
+  }
+  
+  .prose p {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+  }
+  
+  .prose ul {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    list-style-type: disc;
+    padding-left: 1.625em;
+  }
+  
+  .prose li {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  
+  .prose strong {
+    font-weight: 600;
+    color: #111827;
+  }
+</style> 

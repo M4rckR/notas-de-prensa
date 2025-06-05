@@ -1,0 +1,306 @@
+---
+import { ClientRouter } from "astro:transitions";
+import "../styles/global.css";
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <ClientRouter />
+  </head>
+  <body class="min-h-screen bg-gray-100">
+    <div class="">
+      <header>
+        <nav class="">
+          {/* Top bar */}
+          <div class="bg-in-cyan-bg">
+            <div class="container flex justify-end gap-16 mx-auto max-w-7xl px-4">
+              <div class="flex justify-end items-center gap-2 py-2 sm:py-4">
+                <a href="https://insalud.pe/prensa" class="text-sm sm:text-base hover:opacity-80 transition-opacity">
+                  <p>Prensa</p>
+                </a>
+                <div class="w-px h-4 bg-in-cyan-text"></div>
+                <a href="https://insalud.pe/empleabilidad/" class="text-sm sm:text-base hover:opacity-80 transition-opacity">
+                  <p>Empleabilidad</p>
+                </a>
+              </div>
+              <div class="flex items-center gap-8">
+                <a href="https://www.facebook.com/insalud.medicinaespecializada" target="_blank">
+                  <img src="/svg/facebook.svg" alt="facebook" class="w-6 h-6" />
+                </a>
+                <a href="https://www.tiktok.com/@insalud.medespecializada" target="_blank">
+                  <img src="/svg/tiktok.svg" alt="tiktok" class="w-6 h-6" />
+                </a>
+                <a href="https://www.instagram.com/insalud.medicinaespecializada/" target="_blank">
+                  <img src="/svg/instagram.svg" alt="instagram" class="w-6 h-6" />
+                </a>
+                <a href="https://www.youtube.com/@Insalud-me" target="_blank">
+                  <img src="/svg/youtube.svg" alt="youtube" class="w-6 h-6" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Main navigation */}
+          <div class="bg-white">
+            <div class="container mx-auto max-w-7xl px-4">
+              <div class="flex justify-between items-center py-2 sm:py-4">
+                {/* Logo */}
+                <div class="flex items-center">
+                  <img
+                    src="https://insalud.pe/wp-content/uploads/2025/02/Sin-titulo-2-Recuperado-01-1-1.png"
+                    alt="logo"
+                    class="w-40 sm:w-60 py-2 sm:py-4"
+                  />
+                </div>
+
+                {/* Desktop menu */}
+                <ul class="hidden md:flex items-center gap-2 md:gap-4 lg:gap-8">
+                  <li class="hidden lg:block">
+                    <a href="https://insalud.pe/nosotros/" class="font-medium hover:text-in-cyan-text transition-colors">
+                      <p>Nosotros</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://insalud.pe/diagnostico/" class="font-medium hover:text-in-cyan-text transition-colors">
+                      <p>Diagnósticos</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://insalud.pe/servicios/" class="font-medium hover:text-in-cyan-text transition-colors">
+                      <p>Servicios</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://insalud.pe/sedes/" class="font-medium hover:text-in-cyan-text transition-colors">
+                      <p>Sedes</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://insalud.pe/contacto/" class="font-medium hover:text-in-cyan-text transition-colors">
+                      <p>Contacto</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="font-medium hover:text-in-cyan-text transition-colors">
+                      <p>Notas de prensa</p>
+                    </a>
+                  </li>
+                </ul>
+
+                {/* Mobile menu button and menu */}
+                <div class="md:hidden relative">
+                  <button 
+                    class="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                    aria-label="Menu"
+                    onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                  </button>
+
+                  <ul id="mobile-menu" class="hidden absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border">
+                    <li>
+                      <a href="/" class="block font-medium hover:bg-gray-100 p-2 transition-colors">
+                        <p>Nosotros</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/" class="block font-medium hover:bg-gray-100 p-2 transition-colors">
+                        <p>Diagnóstico</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/" class="block font-medium hover:bg-gray-100 p-2 transition-colors">
+                        <p>Servicios</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/" class="block font-medium hover:bg-gray-100 p-2 transition-colors">
+                        <p>Sedes</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/" class="block font-medium hover:bg-gray-100 p-2 transition-colors">
+                        <p>Contacto</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/" class="block font-medium hover:bg-gray-100 p-2 transition-colors">
+                        <p>Notas de prensa</p>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+    </div>
+    </div>
+
+    <main>
+      <div class="bg-in-cyan-bg">
+        <section class="max-w-7xl mx-auto px-4 container md:py-0 pt-4">
+          <div class="flex flex-col sm:flex-row gap-4 sm:gap-16 items-center justify-around">
+            <div class="flex flex-col items-center sm:items-start gap-4">
+              <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-0">Notas de prensa</h1>
+              <div class="flex items-center gap-2">
+                <div class="h-6 sm:h-8 w-2 rounded bg-in-cyan-text"></div>
+                <p class="text-xl sm:text-2xl font-bold">Últimas noticias</p>
+              </div>
+            </div>
+
+            <div class="md:self-end">
+              <img
+                src="/images/ilustracion-concepto-transmision.png"
+                alt="ilustracion-notas-prensa"
+                class="w-60"
+              />
+            </div>
+          </div>
+        </section>
+      </div>
+      <slot />
+    </main>
+
+    <footer class="bg-in-cyan-bg text-in-blue-text text-center md:text-left">
+      <div
+        class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 container max-w-7xl mx-auto px-4 py-16"
+      >
+       <!-- Primero -->
+        <div>
+          <img
+            src="https://insalud.pe/wp-content/uploads/2025/02/Sin-titulo-2-Recuperado-01-1-1.png"
+            alt="logo"
+            class="w-52 block py-4 mx-auto md:mx-0 mb-4 md:mb-0"
+          />
+          <p class="font-bold">NUESTRAS SEDES</p>
+          <div class="pl-4">
+            <a href="https://insalud.pe/golf-vph-1/">
+              <p>InSalud El Golf</p>
+            </a>
+            <a href="https://insalud.pe/jesusmaria-vph-1/">
+              <p>InSalud Jesús María</p>
+            </a>
+            <a href="">
+              <p>InSalud Sur</p>
+            </a>
+            <a href="https://insalud.ec/ondas-de-choque/">
+              <p>InSalud Guayaquil</p>
+            </a>
+            <a href="https://insalud.pa/ondas-de-choque/">
+              <p>InSalud Panama</p>
+            </a>
+            <a href="https://insalud.ec/quito/">
+              <p>InSalud Quito</p>
+            </a>
+          </div>
+        </div>
+        <!-- Segundo -->
+        <div>
+        <div>
+          <p class="font-bold">SOBRE INSALUD</p>
+          <div class="pl-4">
+            <a href="https://insalud.pe/nosotros/">
+              <p>Nosotros</p>
+            </a>
+          </div>
+          <a href="https://insalud.pe/blog">
+            <p class="font-bold">Blog</p>
+          </a>
+          <p class="font-bold">Información para Pacientes</p>
+          <div class="pl-4">
+            <a href="https://insalud.pe/como-me-atiendo/">
+              <p>¿Cómo me atiendo?</p>
+            </a>
+            <a href="https://insalud.pe/deberes-y-derechos-del-paciente/">
+              <p>Deberes y derechos del paciente</p>
+            </a>
+            <a href="https://insalud.pe/wp-content/uploads/2025/04/TERMINOS-Y-CONDICIONES-DE-USO-DEL-SITIO-WEB.pdf">
+              <p>Términos y condiciones</p>
+            </a>
+          </div>
+        </div>
+        </div>
+        <!-- Tercero -->
+        <div>
+          <div>
+            <p class="font-bold">Diagnósticos</p>
+              <div class="pl-4">
+                <a href="https://insalud.pe/diagnostico/">
+                  <p>Prostatitis crónica</p>
+                </a>
+                <a href="https://insalud.pe/diagnostico/">
+                  <p>Eyaculación precoz</p>
+                </a>
+                <a href="https://insalud.pe/diagnostico/">
+                  <p>Micosis Genital</p>
+                </a>
+                <a href="https://insalud.pe/diagnostico/">
+                  <p>VPH Recurrente</p> 
+                </a>
+                <a href="https://insalud.pe/diagnostico/">
+                  <p>Enfermedades de transmisión sexual</p>
+                </a>
+                <a href="https://insalud.pe/diagnostico/">
+                  <p>Disfunción eréctil</p>
+                </a>
+                <a href="https://insalud.pe/diagnostico/">
+                  <p>Herpes genital</p>
+                </a>
+                <a href="">
+                  <p>Infertilidad</p>
+                </a>
+                <a href="https://insalud.pe/diagnostico/">
+                  <p>Chequeo Prostático</p>
+                </a>
+              </div>
+
+          </div>
+        </div>
+        <!-- Cuarto -->
+         <div> 
+          <a href="https://insalud.pe/contacto/">
+            <p class="font-bold">Contacto</p>
+          </a>
+          <a href="https://insalud.pe/empleabilidad/">
+            <p class="font-bold">Trabaja con nosotros</p>
+          </a>
+          <a href="https://insalud.pe/libro-de-reclamaciones/">
+            <p class="font-bold">Libro de reclamaciones</p>
+          </a>
+            <p class="font-bold pb-4">Redes Sociales</p>
+            <div class="flex items-center gap-4">
+              <a href="https://www.facebook.com/insalud.medicinaespecializada" target="_blank">
+                <img src="/svg/facebook.svg" alt="facebook" class="w-6 h-6" />
+              </a>
+              <a href="https://www.instagram.com/insalud.medicinaespecializada/" target="_blank">
+                <img src="/svg/instagram.svg" alt="instagram" class="w-6 h-6" />
+              </a>
+              <a href="https://www.youtube.com/@Insalud-me" target="_blank">
+                <img src="/svg/youtube.svg" alt="youtube" class="w-6 h-6" />
+              </a>
+              <a href="https://www.tiktok.com/@insalud.medespecializada" target="_blank">
+                <img src="/svg/tiktok.svg" alt="tiktok" class="w-6 h-6" />
+              </a>
+            </div>
+         </div>
+      </div>
+      <p class="text-center py-4 bg-in-cyan-bg-medium">
+        2025, IN-SALUD CORP© Todos los derechos reservado
+      </p>
+    </footer>
+  </body>
+</html>

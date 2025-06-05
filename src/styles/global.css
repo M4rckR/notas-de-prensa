@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+
+@theme {
+    --color-in-cyan-bg: #edfbfb;
+    --color-in-cyan-bg-medium: #D9F9F9;
+    --color-in-cyan-text: #29B1AB;
+    --color-in-blue-text: #004569;
+}
+
+body {
+    color: var(--color-in-blue-text);
+}

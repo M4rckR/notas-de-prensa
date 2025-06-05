@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  noticia: CollectionEntry<'noticias'>['data'];
+  slug: string;
+}
+
+const { noticia, slug } = Astro.props;
+
+// Formatear fecha
+function formatearFecha(fecha: Date) {
+  console.log('Fecha original:', fecha);
+  console.log('Fecha es válida:', !isNaN(fecha.getTime()));
+  
+  if (!fecha || isNaN(fecha.getTime())) {
+    return 'Fecha inválida';
+  }
+  
+  return fecha.toLocaleDateString('es-ES', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+---
+
+<article class="bg-white rounded-lg shadow-md overflow-hidden" data-categoria={noticia.categoria}>
+  {noticia.imagen && (
+    <img 
+      src={noticia.imagen} 
+      alt={noticia.titulo}
+      class="w-full h-48 object-cover"
+      loading="lazy"
+    />
+  )}
+  <div class="p-4">
+    <div class="flex justify-between items-center mb-2">
+      <p class="text-gray-500 text-sm">{formatearFecha(noticia.fecha)}</p>
+      <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+        {noticia.categoria}
+      </span>
+    </div>
+    <h2 class="text-xl font-semibold mt-2 text-gray-900">{noticia.titulo}</h2>
+    <p class="text-gray-600 mt-2">{noticia.resumen}</p>
+    <div class="flex justify-between items-center mt-4">
+      <a 
+        href={`/noticias/${slug}`}
+        class="text-blue-600 hover:text-blue-800 inline-block"
+      >
+        Leer más →
+      </a>
+      <p class="text-gray-500 text-sm">Por: {noticia.autor}</p>
+    </div>
+  </div>
+</article>

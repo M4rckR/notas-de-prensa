@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TextFormatter from '../components/TextFormatter.astro';
+
+const textoEjemplo = `##Bienvenidos a la Demo de Formato##
+
+Este es un ejemplo de cómo usar el formateador de texto. Es **muy fácil** dar formato al texto usando marcadores simples.
+
+Aquí tienes algunas cosas que puedes hacer:
+- Crear **texto en negrita** usando **doble asterisco**
+- Hacer _texto en cursiva_ usando _guiones bajos_
+- Crear --texto destacado-- usando --dobles guiones--
+- Crear enlaces como este: [[https://ejemplo.com||visita nuestro sitio]]
+
+##Listas Automáticas##
+- Primer elemento de la lista
+- Segundo elemento de la lista
+- Tercer elemento con **negrita** y --destacado--
+
+Los párrafos se crean automáticamente cuando dejas una línea en blanco entre textos.
+
+##Conclusión##
+¡Es así de simple! Ahora cualquiera puede dar formato al texto sin necesidad de saber HTML.`;
+---
+
+<Layout title="Demo de Formato">
+  <main class="container mx-auto px-4 py-8">
+    <TextFormatter content={textoEjemplo} className="prose max-w-2xl mx-auto" />
+    
+    <div class="mt-8 p-4 bg-gray-100 rounded-lg max-w-2xl mx-auto">
+      <h3 class="text-lg font-semibold mb-2">Guía Rápida de Formato</h3>
+      <TextFormatter content={`
+- Usa **texto** para negritas
+- Usa _texto_ para cursiva
+- Usa --texto-- para destacado
+- Usa ##texto## para títulos
+- Usa [[url||texto]] para enlaces
+- Usa - al inicio de línea para listas
+- Deja una línea en blanco para nuevo párrafo
+      `} />
+    </div>
+  </main>
+</Layout> 

@@ -1,0 +1,63 @@
+---
+export interface Props {
+  content: string;
+  className?: string;
+}
+
+const { content, className = '' } = Astro.props;
+
+function formatText(text: string): string {
+  // Dividir en párrafos (líneas vacías)
+  const paragraphs = text.split(/\n\s*\n/);
+  
+  return paragraphs
+    .map(paragraph => {
+      // Ignorar párrafos vacíos
+      if (!paragraph.trim()) return '';
+      
+      let formatted = paragraph
+        // Negritas: **texto**
+        .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold">$1</strong>')
+        // Títulos: ##texto##
+        .replace(/##(.*?)##/g, '<h3 class="text-xl font-semibold my-3">$1</h3>')
+        // Destacado: --texto--
+        .replace(/\-\-(.*?)\-\-/g, '<span class="bg-yellow-100 px-1">$1</span>')
+        // Enlaces: [[url||texto]]
+        .replace(/\[\[(.*?)\|\|(.*?)\]\]/g, '<a href="$1" class="text-blue-600 hover:underline">$2</a>')
+        // Listas: - item
+        .replace(/^- (.*?)$/gm, '<li class="ml-4">$1</li>')
+        // Cursiva: _texto_
+        .replace(/_(.*?)_/g, '<em class="italic">$1</em>');
+
+      // Si el texto comienza con - es una lista
+      if (paragraph.trim().startsWith('- ')) {
+        return `<ul class="list-disc my-4">${formatted}</ul>`;
+      }
+
+      // Si no es un título (no tiene ##), envolverlo en <p>
+      if (!paragraph.includes('##')) {
+        return `<p class="my-2">${formatted}</p>`;
+      }
+
+      return formatted;
+    })
+    .join('\n');
+}
+---
+
+<div class={`text-formatter ${className}`} set:html={formatText(content)} />
+
+<style>
+  .text-formatter :global(p) {
+    margin: 1em 0;
+  }
+  
+  .text-formatter :global(ul) {
+    margin: 1em 0;
+    padding-left: 1em;
+  }
+  
+  .text-formatter :global(li) {
+    margin: 0.5em 0;
+  }
+</style> 
