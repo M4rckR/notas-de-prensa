@@ -1,14 +1,12 @@
 ---
 id: "8"
-titulo: "Esta es la dieta clave para mejorar la salud de la próstata y la vida sexual..."
+titulo: "Esta es la dieta clave para mejorar la salud de la próstata y la vida sexual masculina: ideal para hombres mayores de 40"
 resumen: "La hidratación adecuada previene infecciones urinarias y problemas como la prostatitis."
 fecha: "2025-05-20"
 imagen: "/images/noticias/noticia-8.png"
 autor: "El tiempo"
 categoria: "Salud"
 ---
-
-# Esta es la dieta clave para mejorar la salud de la próstata y la vida sexual masculina: ideal para hombres mayores de 40
 
 La salud prostática es un tema de gran relevancia para los hombres, especialmente a medida que envejecen. A partir de los 40 años, muchos hombres comienzan a experimentar cambios en esta pequeña glándula del aparato reproductor masculino, lo cual desencadena una serie de problemas, como la hiperplasia benigna o la prostatitis.
 

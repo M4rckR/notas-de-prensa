@@ -4,13 +4,9 @@ titulo: "INSALUD - Centro Médico Especializado"
 resumen: "Centro Médico Especializado con presencia en Perú y expansión en Latinoamérica"
 fecha: "2025-06-05"
 imagen: "/images/noticias/noticia-4.png"
-autor: "Redacción"
+autor: "Empresa peruana del año"
 categoria: "Salud"
 ---
-
-# INSALUD
-
-## Centro Médico Especializado
 
 Fundada el 2020 bajo la dirección del Dr. José Antonio Grandez, nació con el propósito de mejorar la calidad de vida de las personas con tecnología, mínimamente invasiva, a través de servicios de salud con enfoque en medicina regenerativa.
 
