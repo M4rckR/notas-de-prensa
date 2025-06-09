@@ -5,12 +5,72 @@ export interface Props {
 }
 
 const { categories, selectedCategory } = Astro.props;
+
+// Función para obtener el texto de la categoría seleccionada
+function getSelectedCategoryText(selectedCategory: string, categories: string[]) {
+  if (selectedCategory === 'todas') {
+    return 'Todas las noticias';
+  }
+  return categories.find(cat => cat.toLowerCase() === selectedCategory) || 'Seleccionar categoría';
+}
 ---
 
 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-  <h3 class="text-lg font-semibold text-gray-800 mb-4">Filtrar por categoría</h3>
+  <!-- Título para desktop -->
+  <h3 class="text-lg font-semibold text-gray-800 mb-4 hidden md:block">Filtrar por categoría</h3>
   
-  <div class="space-y-2">
+  <!-- Acordeón para móvil -->
+  <div class="md:hidden">
+    <button
+      id="accordion-button"
+      class="w-full flex items-center justify-between px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-gray-700"
+      aria-expanded="false"
+      aria-controls="accordion-content"
+    >
+      <span class="font-medium" id="selected-category-display">
+        {getSelectedCategoryText(selectedCategory, categories)}
+      </span>
+      <svg 
+        class="w-5 h-5 transition-transform duration-200" 
+        id="accordion-arrow"
+        fill="none" 
+        stroke="currentColor" 
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+    
+    <div 
+      id="accordion-content"
+      class="hidden mt-2 border border-gray-200 rounded-md overflow-hidden"
+    >
+      <button 
+        data-category="todas"
+        class={`w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-50 border-b border-gray-200 transition-colors ${
+          selectedCategory === 'todas' ? 'bg-blue-50 text-blue-600 font-medium' : ''
+        }`}
+      >
+        Todas las noticias
+      </button>
+      
+      {categories.map((category, index) => (
+        <button 
+          data-category={category.toLowerCase()}
+          class={`w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors ${
+            index !== categories.length - 1 ? 'border-b border-gray-200' : ''
+          } ${
+            selectedCategory === category.toLowerCase() ? 'bg-blue-50 text-blue-600 font-medium' : ''
+          }`}
+        >
+          {category}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Lista de botones para desktop -->
+  <div class="hidden md:block space-y-2">
     <button 
       data-category="todas"
       class={`w-full text-left px-4 py-2 rounded-md cursor-pointer transition-colors duration-200 ${
@@ -41,7 +101,6 @@ const { categories, selectedCategory } = Astro.props;
   let filterInitialized = false;
 
   function initCategoryFilter() {
-    // Evitar inicialización múltiple
     if (filterInitialized) {
       return;
     }
@@ -50,31 +109,107 @@ const { categories, selectedCategory } = Astro.props;
     const allNewsCards = document.querySelectorAll('[data-categoria]') as NodeListOf<HTMLElement>;
     const noResultsDiv = document.querySelector('.text-center.py-12') as HTMLElement;
     
+    // Elementos del acordeón
+    const accordionButton = document.getElementById('accordion-button');
+    const accordionContent = document.getElementById('accordion-content');
+    const accordionArrow = document.getElementById('accordion-arrow');
+    const selectedCategoryDisplay = document.getElementById('selected-category-display');
+    
     if (!categoryButtons.length || !allNewsCards.length) {
       console.warn('Category filter: No buttons or cards found');
       return;
     }
+
+    // Función para toggle del acordeón
+    function toggleAccordion() {
+      if (!accordionButton || !accordionContent || !accordionArrow) return;
+      
+      const isExpanded = accordionButton.getAttribute('aria-expanded') === 'true';
+      
+      // Toggle el estado
+      accordionButton.setAttribute('aria-expanded', (!isExpanded).toString());
+      accordionContent.classList.toggle('hidden');
+      accordionArrow.style.transform = isExpanded ? '' : 'rotate(180deg)';
+    }
+
+    // Función para cerrar el acordeón
+    function closeAccordion() {
+      if (!accordionButton || !accordionContent || !accordionArrow) return;
+      
+      accordionContent.classList.add('hidden');
+      accordionButton.setAttribute('aria-expanded', 'false');
+      accordionArrow.style.transform = '';
+    }
+
+    // Event listener para el botón del acordeón (solo toggle)
+    if (accordionButton) {
+      // Remover listeners previos
+      accordionButton.replaceWith(accordionButton.cloneNode(true));
+      const newAccordionButton = document.getElementById('accordion-button');
+      
+      if (newAccordionButton) {
+        newAccordionButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleAccordion();
+        });
+      }
+    }
     
+    // Event listeners para los botones de categoría
     categoryButtons.forEach(button => {
-      button.addEventListener('click', function() {
+      // Crear nuevo listener para evitar acumulación
+      const newButton = button.cloneNode(true) as HTMLButtonElement;
+      button.parentNode?.replaceChild(newButton, button);
+      
+      newButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
         const categoria = this.dataset.category;
         if (!categoria) return;
         
         // Guardar posición del scroll
         const currentScrollPosition = window.scrollY;
         
-        // Actualizar botones activos
-        categoryButtons.forEach(btn => {
-          if (btn === this) {
-            btn.className = btn.className.replace(
-              /text-gray-700.*?hover:bg-gray-100/,
-              'bg-blue-600 text-white'
-            );
+        // Actualizar el texto del botón acordeón (obtener referencia fresca)
+        const currentSelectedCategoryDisplay = document.getElementById('selected-category-display');
+        if (currentSelectedCategoryDisplay) {
+          if (categoria === 'todas') {
+            currentSelectedCategoryDisplay.textContent = 'Todas las noticias';
           } else {
-            btn.className = btn.className.replace(
-              'bg-blue-600 text-white',
-              'text-gray-700 hover:bg-gray-100'
-            );
+            currentSelectedCategoryDisplay.textContent = this.textContent?.trim() || 'Categoría';
+          }
+        }
+        
+        // Cerrar acordeón en móvil después de seleccionar
+        closeAccordion();
+        
+        // Actualizar estado activo de TODOS los botones (incluyendo los nuevos)
+        const allCategoryButtons = document.querySelectorAll('button[data-category]') as NodeListOf<HTMLButtonElement>;
+        allCategoryButtons.forEach(btn => {
+          const isMobile = btn.closest('.md\\:hidden');
+          const isActive = btn.dataset.category === categoria;
+          
+          if (isMobile) {
+            // Limpiar todas las clases primero
+            btn.classList.remove('bg-blue-50', 'text-blue-600', 'font-medium');
+            btn.classList.add('text-gray-700');
+            
+            // Agregar clases si está activo
+            if (isActive) {
+              btn.classList.remove('text-gray-700');
+              btn.classList.add('bg-blue-50', 'text-blue-600', 'font-medium');
+            }
+          } else {
+            // Para desktop
+            btn.classList.remove('bg-blue-600', 'text-white', 'text-gray-700', 'hover:bg-gray-100');
+            
+            if (isActive) {
+              btn.classList.add('bg-blue-600', 'text-white');
+            } else {
+              btn.classList.add('text-gray-700', 'hover:bg-gray-100');
+            }
           }
         });
         
@@ -131,21 +266,19 @@ const { categories, selectedCategory } = Astro.props;
     initCategoryFilter();
   }
 
-  // Reinicializar cuando se regresa a la página (navegación del navegador)
+  // Reinicializar cuando se regresa a la página
   window.addEventListener('pageshow', function(event) {
-    // Si es navegación de vuelta desde otra página
     if (event.persisted || window.performance.navigation.type === 2) {
       resetFilter();
       setTimeout(initCategoryFilter, 100);
     }
   });
 
-  // Reinicializar cuando cambia la URL (para navegación interna)
+  // Reinicializar cuando cambia la URL
   let currentUrl = window.location.href;
   setInterval(() => {
     if (window.location.href !== currentUrl) {
       currentUrl = window.location.href;
-      // Solo reinicializar si estamos en la página principal
       if (window.location.pathname === '/' || window.location.pathname === '') {
         resetFilter();
         setTimeout(initCategoryFilter, 100);
