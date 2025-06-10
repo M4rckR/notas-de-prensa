@@ -12,9 +12,6 @@ Insalud, la única red de centros especializados en salud sexual y medicina rege
 
 Esto, en el marco de su plan de expansión al 2027, con el que espera llegar a “cuando menos, diez países en Latinoamérica”, refieren los médicos José Antonio Grandez y Fiorella Inga, fundadores de la firma médica.
 
-
-## Gobierno de Trump planea recortar U$S1.000 millones a Harvard para investigación de salud**
-
 Hasta el cierre del 2024, Insalud administraba cinco locales en Surco, Jesús María, San Juan de Miraflores, Panamá y Guayaquil (Ecuador), respectivamente.
 
 *A esto cabe añadir un sexto establecimiento, inaugurado recientemente (19 de abril) en Quito (Ecuador). Su objetivo para el 2025 es abrir cuatro sedes más en Santiago de Chile, San José de Costa Rica, San Salvador (El Salvador) y Asunción (Paraguay), respectivamente.*

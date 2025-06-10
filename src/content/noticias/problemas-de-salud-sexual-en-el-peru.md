@@ -8,8 +8,6 @@ autor: "TV Peru Noticias"
 categoria: "Salud"
 ---
 
-# Problemas de salud sexual en el Perú: la importancia de la detección temprana
-
 En el Perú, las problemáticas de salud sexual están en aumento. Médicos de EsSalud han informado, por ejemplo, que, en los últimos dos años, los casos de disfunción eréctil han crecido entre pacientes de 20 a 30 años, atribuido principalmente a factores psicológicos como el estrés.
 
 Esta y otras afecciones como la prostatitis e incontinencia urinaria afectan a muchos peruanos, pero existen tratamientos disponibles que, junto a una detección temprana, permiten una mejoría en la salud.

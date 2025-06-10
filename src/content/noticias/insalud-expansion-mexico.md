@@ -8,6 +8,10 @@ autor: "Gestión"
 categoria: "Negocios"
 ---
 
-En *Gestión*, valoramos profundamente la labor periodística que realizamos para mantenerlos informados. 
+Fundada durante la pandemia por los médicos José Antonio Grandez y Fiorella Inga, la peruana Insalud se ha consolidado como un centro especializado en medicina sexual y regenerativa, enfocado en brindar atención ambulatoria en el primer nivel de atención. A la fecha, opera tres centros en Lima, ubicados en Jesús María, San Juan de Miraflores y Santiago de Surco.
 
-Por ello, les recordamos que **no está permitido reproducir, comercializar, distribuir o copiar total o parcialmente los contenidos** que publicamos en nuestra web, sin autorización previa y expresa de *Empresa Editora El Comercio S.A.*
+Además, cuentan con dos sedes internacionales: una en Guayaquil (Ecuador) y otra en Panamá.
+
+> “Apostamos por expandirnos en torres médicas, a diferencia de nuestra sede en San Juan de Miraflores, que es puerta a calle”, señaló Grandez.
+
+

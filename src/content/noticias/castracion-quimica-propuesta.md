@@ -8,9 +8,6 @@ autor: "Redacción PERÚ21"
 categoria: "Salud"
 ---
 
-# Castración química: ¿de qué se trata la propuesta del presidente Castillo?
-
-
 La propuesta del presidente Pedro Castillo, de castigar a los violadores con una castración química, ha desatado reacciones a favor y en contra por parte de autoridades y la ciudadanía misma. Pero, ¿de qué trata la castración química? El dr. José Antonio Grandez, Urólogo y gerente de Insalud, se refirió al respecto.
 
 > “La castración química es un término utilizado para describir los medicamentos destinados a reducir la libido y a reducir la actividad sexual, por lo general, para impedir que los violadores, pederastas y otros delincuentes sexuales reincidan”, explica el especialista.

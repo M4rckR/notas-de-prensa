@@ -2,9 +2,9 @@
 id: "11"
 titulo: "Llega a Ecuador revolucionario técnica para tratar disfunción eréctil"
 resumen: "El departamento de urología de INSALUD, liderado por el Dr. Antonio Grandez"
-fecha: "Metro"
+fecha: "2022-07-27"
 imagen: "/images/noticias/noticia-11.png"
-autor: "Eva Acosta"
+autor: "Metro"
 categoria: "Lifestyle"
 ---
 
