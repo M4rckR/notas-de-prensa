@@ -9,13 +9,13 @@ const { categories, selectedCategory } = Astro.props;
 // Función para obtener el texto de la categoría seleccionada
 function getSelectedCategoryText(selectedCategory: string, categories: string[]) {
   if (selectedCategory === 'todas') {
-    return 'Todas las noticias';
+    return 'Seleccionar categoría';
   }
   return categories.find(cat => cat.toLowerCase() === selectedCategory) || 'Seleccionar categoría';
 }
 ---
 
-<div class="bg-white rounded-lg shadow-md p-6 mb-6">
+<div class="bg-white rounded-lg shadow-md p-6">
   <!-- Título para desktop -->
   <h3 class="text-lg font-semibold text-gray-800 mb-4 hidden md:block">Filtrar por categoría</h3>
   
@@ -51,7 +51,7 @@ function getSelectedCategoryText(selectedCategory: string, categories: string[])
           selectedCategory === 'todas' ? 'bg-blue-50 text-blue-600 font-medium' : ''
         }`}
       >
-        Todas las noticias
+        Seleccionar categoría
       </button>
       
       {categories.map((category, index) => (
@@ -176,7 +176,7 @@ function getSelectedCategoryText(selectedCategory: string, categories: string[])
         const currentSelectedCategoryDisplay = document.getElementById('selected-category-display');
         if (currentSelectedCategoryDisplay) {
           if (categoria === 'todas') {
-            currentSelectedCategoryDisplay.textContent = 'Todas las noticias';
+            currentSelectedCategoryDisplay.textContent = 'Seleccionar categoría';
           } else {
             currentSelectedCategoryDisplay.textContent = this.textContent?.trim() || 'Categoría';
           }
