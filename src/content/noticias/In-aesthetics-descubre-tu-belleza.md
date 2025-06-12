@@ -8,12 +8,9 @@ autor: "Redacción COSAS"
 categoria: "Lifestyle"
 ---
 
-**Crónica de marcaLifestyle**
 
 **Conoce el nuevo centro de Medicina Estética y Regenerativa de Insalud: In-Aesthetics, que ofrece una propuesta innovadora para prevenir los signos del envejecimiento y elevar tu calidad de vida.**
 
-
-***<p style="text-align:center;">**Por Redacción COSAS**</p>***
  
 Con la premisa de promover un nuevo concepto de salud que ha evolucionado hacia la sensación de estar bien y sentirse bien como estilo de vida, en 2021 nace In-Aesthetics, el primer centro de Medicina Estética y Regenerativa del Perú dirigido a hombres y mujeres. Con un staff de médicos especializados en el cuidado integral y el bienestar en urología regenerativa, dermatología, cirugía plástica, medicina estética, nutrición y ginecología, In-Aesthetics busca impactar positivamente en la calidad de vida de sus pacientes y en su entorno.
 
