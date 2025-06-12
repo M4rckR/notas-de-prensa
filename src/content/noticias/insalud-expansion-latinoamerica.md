@@ -3,7 +3,7 @@ id: "3"
 titulo: "Insalud, centro de salud sexual y regenerativa, busca conquistar Latinoamérica al 2027: ¿cuáles son sus planes y servicios?"
 resumen: "Insalud proyecta su expansión por Latinoamérica con servicios especializados en salud sexual y regenerativa"
 fecha: "2025-04-23"
-imagen: "/images/noticias/noticia-3.png"
+imagen: "/images/noticias/noticia-2.png"
 autor: "El Comercio"
 categoria: "Negocios"
 ---
