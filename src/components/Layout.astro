@@ -27,7 +27,7 @@ const { title } = Astro.props;
       <header>
         <nav>
           {/* Top bar */}
-          <div class="bg-in-cyan-bg">
+          <!-- <div class="bg-in-cyan-bg">
             <div class="container flex justify-end gap-8 md:gap-16 mx-auto max-w-7xl px-4">
               <div class="flex justify-end items-center gap-2 py-2 sm:py-4">
                 <a href="https://prensa.insalud.pe/" class="text-sm sm:text-base hover:opacity-80 transition-opacity">
@@ -53,7 +53,7 @@ const { title } = Astro.props;
                 </a>
               </div>
             </div>
-          </div>
+          </div> -->
 
           {/* Main navigation */}
           <div class="bg-white">
@@ -73,33 +73,13 @@ const { title } = Astro.props;
                 {/* Desktop menu */}
                 <ul class="hidden md:flex items-center gap-2 md:gap-4 lg:gap-8">
                   <li class="hidden lg:block">
-                    <a href="https://insalud.pe/nosotros/" class="font-medium hover:text-in-cyan-text transition-colors">
-                      <p>Nosotros</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://insalud.pe/diagnostico/" class="font-medium hover:text-in-cyan-text transition-colors">
+                    <a href="https://insalud.pe/diagnosticos" class="font-medium hover:text-in-cyan-text transition-colors">
                       <p>Diagnósticos</p>
                     </a>
                   </li>
                   <li>
-                    <a href="https://insalud.pe/servicios/" class="font-medium hover:text-in-cyan-text transition-colors">
+                    <a href="https://insalud.pe/servicios" class="font-medium hover:text-in-cyan-text transition-colors">
                       <p>Servicios</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://insalud.pe/sedes/" class="font-medium hover:text-in-cyan-text transition-colors">
-                      <p>Sedes</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://insalud.pe/contacto/" class="font-medium hover:text-in-cyan-text transition-colors">
-                      <p>Contacto</p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="font-medium hover:text-in-cyan-text transition-colors">
-                      <p>Notas de prensa</p>
                     </a>
                   </li>
                 </ul>
@@ -118,33 +98,13 @@ const { title } = Astro.props;
 
                   <ul id="mobile-menu" class="hidden absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border">
                     <li>
-                      <a href="/" class="block font-medium hover:bg-gray-100 p-2 transition-colors">
-                        <p>Nosotros</p>
+                      <a href="https://insalud.pe/diagnosticos" class="block font-medium hover:bg-gray-100 p-2 transition-colors">
+                        <p>Diagnósticos</p>
                       </a>
                     </li>
                     <li>
-                      <a href="/" class="block font-medium hover:bg-gray-100 p-2 transition-colors">
-                        <p>Diagnóstico</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/" class="block font-medium hover:bg-gray-100 p-2 transition-colors">
+                      <a href="https://insalud.pe/servicios" class="block font-medium hover:bg-gray-100 p-2 transition-colors">
                         <p>Servicios</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/" class="block font-medium hover:bg-gray-100 p-2 transition-colors">
-                        <p>Sedes</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/" class="block font-medium hover:bg-gray-100 p-2 transition-colors">
-                        <p>Contacto</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/" class="block font-medium hover:bg-gray-100 p-2 transition-colors">
-                        <p>Notas de prensa</p>
                       </a>
                     </li>
                   </ul>
